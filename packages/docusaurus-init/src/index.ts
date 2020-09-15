@@ -39,6 +39,7 @@ async function updatePkg(
 
 export default async function init(
   rootDir: string,
+  skipInstall: boolean,
   siteName?: string,
   reqTemplate?: string,
 ): Promise<void> {
@@ -153,15 +154,17 @@ export default async function init(
 
   const pkgManager = useYarn ? 'yarn' : 'npm';
 
-  console.log(`Installing dependencies with: ${chalk.cyan(pkgManager)}`);
+  if (skipInstall === false) {
+    console.log(`Installing dependencies with: ${chalk.cyan(pkgManager)}`);
 
-  try {
-    shell.exec(`cd "${name}" && ${useYarn ? 'yarn' : 'npm install'}`);
-  } catch (err) {
-    console.log(chalk.red('Installation failed'));
-    throw err;
+    try {
+      shell.exec(`cd "${name}" && ${useYarn ? 'yarn' : 'npm install'}`);
+    } catch (err) {
+      console.log(chalk.red('Installation failed'));
+      throw err;
+    }
+    console.log();
   }
-  console.log();
 
   // Display the most elegant way to cd.
   const cdpath =

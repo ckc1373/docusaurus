@@ -38,6 +38,12 @@ npx @docusaurus/init@next init my-website facebook
 npx @docusaurus/init@next init my-website bootstrap
 ```
 
+**[Skip installing dependencies]:** If you wish to skip the dependency install and handle it later on your own, pass a flag like the following:
+
+```bash
+npx @docusaurus/init@next init my-website classic --skip-install
+```
+
 ## Project structure
 
 Assuming you chose the classic template and named your site `my-website`, you will see the following files generated under a new directory `my-website/`:

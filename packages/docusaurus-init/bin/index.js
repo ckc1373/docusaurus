@@ -38,9 +38,15 @@ program
 
 program
   .command('init [siteName] [template] [rootDir]')
+  .option('-s --skip-install', 'Skip installing deps', false)
   .description('Initialize website')
-  .action((siteName, template, rootDir = '.') => {
-    wrapCommand(init)(path.resolve(rootDir), siteName, template);
+  .action((siteName, template, rootDir = '.', cmdObj) => {
+    wrapCommand(init)(
+      path.resolve(rootDir),
+      cmdObj.skipInstall,
+      siteName,
+      template,
+    );
   });
 
 program.arguments('<command>').action((cmd) => {
